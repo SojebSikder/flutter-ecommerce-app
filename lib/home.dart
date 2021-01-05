@@ -31,6 +31,7 @@ class _HomePageSate extends State<HomePage> {
         animationDuration: Duration(milliseconds: 1000),
         dotSize: 4.0,
         indicatorBgPadding: 2.0,
+        dotBgColor: Colors.transparent,
       ),
     );
     return Scaffold(
@@ -94,35 +95,50 @@ class _HomePageSate extends State<HomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text("Home"),
-                leading: Icon(Icons.home),
+                leading: Icon(
+                  Icons.home,
+                  color: Colors.red,
+                ),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
                 title: Text("My Account"),
-                leading: Icon(Icons.person),
+                leading: Icon(
+                  Icons.person,
+                  color: Colors.red,
+                ),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
                 title: Text("My orders"),
-                leading: Icon(Icons.shopping_basket),
+                leading: Icon(
+                  Icons.shopping_basket,
+                  color: Colors.red,
+                ),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
-                title: Text("Categories"),
-                leading: Icon(Icons.dashboard),
+                title: Text("Shopping cart"),
+                leading: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.red,
+                ),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
                 title: Text("Favorites"),
-                leading: Icon(Icons.favorite),
+                leading: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
               ),
             ),
             Divider(),
@@ -130,17 +146,14 @@ class _HomePageSate extends State<HomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text("Settings"),
-                leading: Icon(
-                  Icons.settings,
-                  color: Colors.blue,
-                ),
+                leading: Icon(Icons.settings),
               ),
             ),
             InkWell(
               onTap: () {},
               child: ListTile(
                 title: Text("About"),
-                leading: Icon(Icons.help, color: Colors.green),
+                leading: Icon(Icons.help),
               ),
             ),
           ],
