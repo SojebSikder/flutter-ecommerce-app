@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Custom Package
 import 'components/horizontal_listview.dart';
 import 'components/products.dart';
+import 'pages/cart.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -65,7 +66,10 @@ class _HomePageSate extends State<HomePage> {
               Icons.shopping_cart,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Cart()));
+            },
           )
         ],
         //
@@ -122,7 +126,10 @@ class _HomePageSate extends State<HomePage> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Cart()));
+              },
               child: ListTile(
                 title: Text("Shopping cart"),
                 leading: Icon(
