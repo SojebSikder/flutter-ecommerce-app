@@ -44,6 +44,54 @@ class _LoginState extends State<Login> {
     });
   }
 
+  Future handleSignIn() async {
+    preferences = await SharedPreferences.getInstance();
+
+    setState(() {
+      loading = true;
+    });
+
+    GoogleSignInAccount googleUser = await googleSignIn.signIn();
+    GoogleSignInAuthentication googleSignInAuthentication =
+        await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken);
+    FirebaseUser firebaseUser =
+        (await firebaseAuth.signInWithCredential(credential)) as FirebaseUser;
+
+    if (firebaseUser != null) {
+      final QuerySnapshot result = (await Firestore.instance
+          .collection("user")
+          .where("id", isEqualTo: firebaseUser.uid)
+          .getDocuments()) as QuerySnapshot;
+      final List<DocumentSnapshot> documents = result.documents;
+
+      if (documents.length == 0) {
+        Firestore.instance
+            .collection("users")
+            .document(firebaseUser.uid)
+            .setData({
+          "id": firebaseUser.uid,
+          "username": firebaseUser.displayName,
+          "profilePicture": firebaseUser.photoURL,
+        });
+
+        await preferences.setString("id", firebaseUser.uid);
+        await preferences.setString("username", firebaseUser.displayName);
+        await preferences.setString("photoUrl", firebaseUser.photoURL);
+      } else {
+        await preferences.setString("id", documents[0]['id']);
+        await preferences.setString("username", documents[0]['username']);
+        await preferences.setString("photoUrl", documents[0]['photoUrl']);
+      }
+      Fluttertoast.showToast(msg: "Login was successul");
+      setState(() {
+        loading = false;
+      });
+    } else {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
