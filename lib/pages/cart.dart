@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// Custom Imports
+import 'package:bihongobuy/components/cart_products.dart';
+
 class Cart extends StatefulWidget {
   @override
   _CartState createState() => _CartState();
@@ -37,6 +40,8 @@ class _CartState extends State<Cart> {
         ],
         //
       ),
+      //
+      body: Cart_products(),
       //
       bottomNavigationBar: Container(
         color: Colors.white,
