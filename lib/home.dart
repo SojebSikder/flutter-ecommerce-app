@@ -166,24 +166,35 @@ class _HomePageSate extends State<HomePage> {
           ],
         ),
       ),
-      body: ListView(
+      body: Column(
         children: [
           image_carousel,
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("Categories"),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Categories",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
           // Horizontal List View
           HorizontalList(),
 
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("Recent products"),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Recent products",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
 
           // grid view
-          Container(
-            height: 320.0,
+          Flexible(
             child: Products(),
           ),
         ],
