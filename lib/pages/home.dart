@@ -2,9 +2,9 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 
 // Custom Package
-import 'components/horizontal_listview.dart';
-import 'components/products.dart';
-import 'pages/cart.dart';
+import 'package:bihongobuy/components/horizontal_listview.dart';
+import 'package:bihongobuy/components/products.dart';
+import 'package:bihongobuy/pages/cart.dart';
 
 class HomePage extends StatefulWidget {
   @override

@@ -1,6 +1,5 @@
+import 'package:bihongobuy/pages/login.dart';
 import 'package:flutter/material.dart';
-
-import 'home.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BihongoBuy',
-      home: HomePage(),
+      home: Login(),
     );
   }
 }
