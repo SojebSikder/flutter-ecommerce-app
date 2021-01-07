@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -45,6 +46,7 @@ class _LoginState extends State<Login> {
   }
 
   Future handleSignIn() async {
+    //await Firebase.initializeApp();
     preferences = await SharedPreferences.getInstance();
 
     setState(() {
@@ -89,7 +91,12 @@ class _LoginState extends State<Login> {
       setState(() {
         loading = false;
       });
-    } else {}
+
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    } else {
+      Fluttertoast.showToast(msg: "Login failed");
+    }
   }
 
   @override
@@ -98,7 +105,10 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text("Login"),
+        title: Text(
+          "Login",
+          style: TextStyle(color: Colors.red),
+        ),
         elevation: 0.5,
       ),
       body: Stack(
