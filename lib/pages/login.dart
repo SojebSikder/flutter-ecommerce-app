@@ -107,26 +107,33 @@ class _LoginState extends State<Login> {
         centerTitle: true,
         title: Text(
           "Login",
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.red.shade900),
         ),
-        elevation: 0.5,
+        elevation: 0.1,
       ),
       body: Stack(
         children: [
           Center(
             child: FlatButton(
+              color: Colors.red.shade900,
               onPressed: () {
                 handleSignIn();
               },
-              child: Text("Sign in / Sign up with google"),
+              child: Text(
+                "Sign in / Sign up with google",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           Visibility(
             visible: loading ?? true,
-            child: Container(
-              color: Colors.white.withOpacity(0.7),
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+            child: Center(
+              child: Container(
+                alignment: Alignment.center,
+                color: Colors.white.withOpacity(0.9),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                ),
               ),
             ),
           )
