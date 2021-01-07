@@ -94,8 +94,34 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        //
-        );
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: Text("Login"),
+        elevation: 0.5,
+      ),
+      body: Stack(
+        children: [
+          Center(
+            child: FlatButton(
+              onPressed: () {
+                handleSignIn();
+              },
+              child: Text("Sign in / Sign up with google"),
+            ),
+          ),
+          Visibility(
+            visible: loading ?? true,
+            child: Container(
+              color: Colors.white.withOpacity(0.7),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
