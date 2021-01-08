@@ -101,19 +101,41 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Text(
-          "Login",
-          style: TextStyle(color: Colors.red.shade900),
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            //Image.asset("images/logo.png", fit: BoxFit.cover),
+            Container(
+              alignment: Alignment.topCenter,
+              child: Image.asset(
+                "images/logo.png",
+                width: 150.0,
+                height: 150.0,
+              ),
+            ),
+            Visibility(
+              visible: loading ?? true,
+              child: Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  color: Colors.white.withOpacity(0.9),
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        elevation: 0.1,
-      ),
-      body: Stack(
-        children: [
-          Center(
+        bottomNavigationBar: Container(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 12.0,
+              right: 12.0,
+              top: 8.0,
+              bottom: 8.0,
+            ),
             child: FlatButton(
               color: Colors.red.shade900,
               onPressed: () {
@@ -125,19 +147,7 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-          Visibility(
-            visible: loading ?? true,
-            child: Center(
-              child: Container(
-                alignment: Alignment.center,
-                color: Colors.white.withOpacity(0.9),
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                ),
-              ),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
