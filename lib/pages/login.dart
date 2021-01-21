@@ -134,7 +134,7 @@ class _LoginState extends State<Login> {
               child: Center(
                 child: Form(
                   key: _formKey,
-                  child: Column(
+                  child: ListView(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -217,60 +217,34 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      Text(
-                        "Forgot password",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      RichText(
-                        text: TextSpan(
-                            text: "Don't have an account? click here to ",
-                            children: [
-                              TextSpan(
-                                text: "sign up!",
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ]),
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      Divider(
-                        color: Colors.white,
-                      ),
-                      Text(
-                        "Other login in option",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Forgot password",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Material(
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.red,
-                          elevation: 0.0,
-                          child: MaterialButton(
-                            onPressed: () {
-                              handleSignIn();
-                            },
-                            minWidth: MediaQuery.of(context).size.width,
-                            child: Text(
-                              "Google",
-                              textAlign: TextAlign.center,
+                        child: RichText(
+                          text: TextSpan(
+                              text: "Don't have an account? click here to ",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.0,
                               ),
-                            ),
-                          ),
+                              children: [
+                                TextSpan(
+                                  text: "sign up!",
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ]),
                         ),
                       ),
                     ],
