@@ -1,64 +1,27 @@
-import 'package:bihongobuy/pages/home.dart';
-import 'package:bihongobuy/pages/signup.dart';
+import 'package:bihongobuy/pages/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-class Login extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   // Initialize variable
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _nameTextController = TextEditingController();
+  TextEditingController _confirmPasswordTextController =
+      TextEditingController();
+  String gender;
 
   SharedPreferences preferences;
   bool loading = false;
   bool isLoggedin = false;
-
-  @override
-  initState() {
-    super.initState();
-    isSignedIn();
-  }
-
-  // Methods
-  void isSignedIn() async {
-    setState(() {
-      loading = true;
-    });
-
-    preferences = await SharedPreferences.getInstance();
-    //isLoggedin =;
-
-    if (isLoggedin) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
-    }
-
-    setState(() {
-      loading = false;
-    });
-  }
-
-/*
-  Future handleSignIn() async {
-    //await Firebase.initializeApp();
-    preferences = await SharedPreferences.getInstance();
-
-    setState(() {
-      loading = true;
-    });
-
-  } */
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +56,32 @@ class _LoginState extends State<Login> {
                   key: _formKey,
                   child: ListView(
                     children: [
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white.withOpacity(0.8),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: TextFormField(
+                              controller: _nameTextController,
+                              decoration: InputDecoration(
+                                labelText: "User name *",
+                                hintText: "User name",
+                                icon: Icon(Icons.lock),
+                              ),
+                              // ignore: missing_return
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "The user name field cannot be empty";
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding:
                             const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
@@ -142,7 +131,34 @@ class _LoginState extends State<Login> {
                                 hintText: "Password",
                                 icon: Icon(Icons.lock),
                               ),
-                              keyboardType: TextInputType.emailAddress,
+                              // ignore: missing_return
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "The password faild cannot be empty";
+                                } else if (value.length < 6) {
+                                  return "Password has to be at least 6 characters long";
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white.withOpacity(0.8),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: TextFormField(
+                              controller: _confirmPasswordTextController,
+                              decoration: InputDecoration(
+                                labelText: "Confirm password *",
+                                hintText: "Confirm password",
+                                icon: Icon(Icons.lock),
+                              ),
                               // ignore: missing_return
                               validator: (value) {
                                 if (value.isEmpty) {
@@ -166,7 +182,7 @@ class _LoginState extends State<Login> {
                             onPressed: () {},
                             minWidth: MediaQuery.of(context).size.width,
                             child: Text(
-                              "Login",
+                              "Register",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
@@ -179,31 +195,36 @@ class _LoginState extends State<Login> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Forgot password",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUp()));
+                            Navigator.pop(context);
                           },
                           child: Text(
-                            "Sign up",
+                            "Login",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.red,
                             ),
                           ),
                         ),
+
+                        /*RichText(
+                          text: TextSpan(
+                              text: "Don't have an account? click here to ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.0,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: "sign up!",
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ]),
+                        ), */
                       ),
                     ],
                   ),
