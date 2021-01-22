@@ -108,6 +108,7 @@ class _LoginState extends State<Login> {
                                 labelText: "Email *",
                                 hintText: "Email",
                                 icon: Icon(Icons.email),
+                                border: InputBorder.none,
                               ),
                               keyboardType: TextInputType.emailAddress,
                               // ignore: missing_return
@@ -141,6 +142,7 @@ class _LoginState extends State<Login> {
                                 labelText: "Password *",
                                 hintText: "Password",
                                 icon: Icon(Icons.lock),
+                                border: InputBorder.none,
                               ),
                               keyboardType: TextInputType.emailAddress,
                               // ignore: missing_return
