@@ -160,7 +160,7 @@ class _LoginState extends State<Login> {
                             const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                         child: Material(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.blue,
+                          color: Colors.red.shade700,
                           elevation: 0.0,
                           child: MaterialButton(
                             onPressed: () {},
@@ -200,7 +200,7 @@ class _LoginState extends State<Login> {
                             "Sign up",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.red,
+                              color: Colors.blue,
                             ),
                           ),
                         ),

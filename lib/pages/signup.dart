@@ -70,7 +70,7 @@ class _SignUpState extends State<SignUp> {
                               decoration: InputDecoration(
                                 labelText: "User name *",
                                 hintText: "User name",
-                                icon: Icon(Icons.lock),
+                                icon: Icon(Icons.person),
                               ),
                               // ignore: missing_return
                               validator: (value) {
@@ -176,13 +176,13 @@ class _SignUpState extends State<SignUp> {
                             const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                         child: Material(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.blue,
+                          color: Colors.red.shade700,
                           elevation: 0.0,
                           child: MaterialButton(
                             onPressed: () {},
                             minWidth: MediaQuery.of(context).size.width,
                             child: Text(
-                              "Register",
+                              "Sign up",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
@@ -203,7 +203,7 @@ class _SignUpState extends State<SignUp> {
                             "Login",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.red,
+                              color: Colors.blue,
                             ),
                           ),
                         ),

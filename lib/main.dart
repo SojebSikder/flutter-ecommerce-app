@@ -14,6 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BihongoBuy',
+      theme: ThemeData(
+        primaryColor: Colors.red.shade900,
+      ),
       home: Login(),
     );
   }
