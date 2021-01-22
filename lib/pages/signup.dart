@@ -1,7 +1,8 @@
-import 'package:bihongobuy/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bihongobuy/db/users.dart';
+
+import 'home.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -12,6 +13,8 @@ class _SignUpState extends State<SignUp> {
   // Initialize variable
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
+  UserServices _userServices = UserServices();
+
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _nameTextController = TextEditingController();
@@ -33,6 +36,40 @@ class _SignUpState extends State<SignUp> {
         gender = e;
       }
     });
+  }
+
+  /// Method for Signup with firebase (email and password)
+  Future validateForm() async {
+    FormState formState = _formKey.currentState;
+    Map value;
+
+    if (formState.validate()) {
+      formState.reset();
+      User user = firebaseAuth.currentUser;
+      if (user == null) {
+        UserCredential userCredential =
+            await firebaseAuth.createUserWithEmailAndPassword(
+                email: _emailTextController.text,
+                password: _passwordTextController.text);
+
+        user = userCredential.user;
+        if (user != null) {
+          if (user.getIdToken() != null) {
+            value = {
+              "username": _nameTextController.text, //user.displayName
+              "email": user.email,
+              "userId": user.uid,
+              "gender": gender,
+            };
+            _userServices.createUser(user.uid, value);
+
+            // Move to HomePage by replacing current page
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          }
+        }
+      }
+    }
   }
 
   @override
@@ -245,6 +282,7 @@ class _SignUpState extends State<SignUp> {
                                       value) {
                                     return "Password not match";
                                   }
+                                  return null;
                                 },
                               ),
                               trailing: IconButton(
@@ -271,7 +309,9 @@ class _SignUpState extends State<SignUp> {
                           color: Colors.red.shade700,
                           elevation: 0.0,
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              validateForm();
+                            },
                             minWidth: MediaQuery.of(context).size.width,
                             child: Text(
                               "Sign up",
