@@ -18,10 +18,19 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _confirmPasswordTextController =
       TextEditingController();
   String gender;
-
-  SharedPreferences preferences;
+  String groupValue = "male";
   bool loading = false;
-  bool isLoggedin = false;
+
+  // Methods
+  valueChanged(e) {
+    setState(() {
+      if (e == "male") {
+        groupValue = e;
+      } else if (e == "female") {
+        groupValue = e;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +88,45 @@ class _SignUpState extends State<SignUp> {
                                 }
                               },
                             ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                        child: Container(
+                          color: Colors.white.withOpacity(0.4),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: ListTile(
+                                  title: Text(
+                                    "male",
+                                    textAlign: TextAlign.end,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  trailing: Radio(
+                                    value: "male",
+                                    groupValue: groupValue,
+                                    onChanged: (e) => valueChanged(e),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: ListTile(
+                                  title: Text(
+                                    "female",
+                                    textAlign: TextAlign.end,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  trailing: Radio(
+                                    value: "female",
+                                    groupValue: groupValue,
+                                    onChanged: (e) => valueChanged(e),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -207,24 +255,6 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
-
-                        /*RichText(
-                          text: TextSpan(
-                              text: "Don't have an account? click here to ",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.0,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "sign up!",
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ]),
-                        ), */
                       ),
                     ],
                   ),
