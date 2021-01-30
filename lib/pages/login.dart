@@ -37,7 +37,14 @@ class _LoginState extends State<Login> {
     });
 
     preferences = await SharedPreferences.getInstance();
+    User user = firebaseAuth.currentUser;
     //isLoggedin =;
+
+    if (user != null) {
+      setState(() {
+        isLoggedin = true;
+      });
+    }
 
     if (isLoggedin) {
       Navigator.pushReplacement(

@@ -1,4 +1,5 @@
 import 'package:bihongobuy/pages/cart.dart';
+import 'package:bihongobuy/pages/login.dart';
 import 'package:flutter/material.dart';
 
 class DrawerComponent extends StatefulWidget {
@@ -96,6 +97,19 @@ class _DrawerComponentState extends State<DrawerComponent> {
             child: ListTile(
               title: Text("About"),
               leading: Icon(Icons.help),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Login()));
+            },
+            child: ListTile(
+              title: Text("Logout"),
+              leading: Icon(
+                Icons.logout,
+                color: Colors.blue,
+              ),
             ),
           ),
         ],
