@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
               "userId": user.uid,
               "gender": gender,
             };
-            _userServices.createUser(user.uid, value);
+            _userServices.createUser(value);
 
             // Move to HomePage by replacing current page
             Navigator.pushReplacement(
@@ -232,7 +232,7 @@ class _SignUpState extends State<SignUp> {
                                 validator: (value) {
                                   if (value.isEmpty) {
                                     return "The password faild cannot be empty";
-                                  } else if (value.length < 6) {
+                                  } else if (value.length < 8) {
                                     return "Password has to be at least 6 characters long";
                                   }
                                 },
@@ -253,54 +253,54 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                        child: Material(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.white.withOpacity(0.8),
-                          elevation: 0.0,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 12.0),
-                            child: ListTile(
-                              title: TextFormField(
-                                controller: _confirmPasswordTextController,
-                                obscureText: hidePass,
-                                decoration: InputDecoration(
-                                  labelText: "Confirm password *",
-                                  hintText: "Confirm password",
-                                  icon: Icon(Icons.lock),
-                                  border: InputBorder.none,
-                                ),
-                                // ignore: missing_return
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return "The password faild cannot be empty";
-                                  } else if (value.length < 6) {
-                                    return "Password has to be at least 6 characters long";
-                                  } else if (_passwordTextController.text !=
-                                      value) {
-                                    return "Password not match";
-                                  }
-                                  return null;
-                                },
-                              ),
-                              trailing: IconButton(
-                                icon: Icon(Icons.remove_red_eye),
-                                onPressed: () {
-                                  setState(() {
-                                    if (hidePass == true) {
-                                      hidePass = false;
-                                    } else if (hidePass == false) {
-                                      hidePass = true;
-                                    }
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding:
+                      //       const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                      //   child: Material(
+                      //     borderRadius: BorderRadius.circular(10.0),
+                      //     color: Colors.white.withOpacity(0.8),
+                      //     elevation: 0.0,
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.only(left: 12.0),
+                      //       child: ListTile(
+                      //         title: TextFormField(
+                      //           controller: _confirmPasswordTextController,
+                      //           obscureText: hidePass,
+                      //           decoration: InputDecoration(
+                      //             labelText: "Confirm password *",
+                      //             hintText: "Confirm password",
+                      //             icon: Icon(Icons.lock),
+                      //             border: InputBorder.none,
+                      //           ),
+                      //           // ignore: missing_return
+                      //           validator: (value) {
+                      //             if (value.isEmpty) {
+                      //               return "The password faild cannot be empty";
+                      //             } else if (value.length < 8) {
+                      //               return "Password has to be at least 6 characters long";
+                      //             } else if (_passwordTextController.text !=
+                      //                 value) {
+                      //               return "Password not match";
+                      //             }
+                      //             return null;
+                      //           },
+                      //         ),
+                      //         trailing: IconButton(
+                      //           icon: Icon(Icons.remove_red_eye),
+                      //           onPressed: () {
+                      //             setState(() {
+                      //               if (hidePass == true) {
+                      //                 hidePass = false;
+                      //               } else if (hidePass == false) {
+                      //                 hidePass = true;
+                      //               }
+                      //             });
+                      //           },
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       Padding(
                         padding:
                             const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
